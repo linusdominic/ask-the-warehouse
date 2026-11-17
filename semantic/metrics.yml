@@ -1,0 +1,165 @@
+# The semantic layer: every number the assistant can report is defined here, once.
+# A metric's `expr` is a complete SQL aggregate, so ratios stay correct at any grouping.
+
+business_timezone: America/Chicago
+
+entities:
+  orders:
+    table: analytics.fact_orders
+    alias: o
+    time_column: o.ordered_at
+    # Applied to every orders metric. QA test orders never count.
+    base_filter: o.is_test = false
+    joins:
+      product: JOIN analytics.dim_product p ON p.product_id = o.product_id
+    dimensions:
+      region:
+        expr: o.region
+        description: Customer sales region (Northeast, Southeast, Midwest, West)
+      channel:
+        expr: o.channel
+        description: Sales channel (retail, wholesale, online)
+      product:
+        expr: p.product_name
+        join: product
+        description: Product name
+      category:
+        expr: p.category
+        join: product
+        description: Product category
+
+  production:
+    table: analytics.fact_production
+    alias: r
+    time_column: r.produced_at
+    joins:
+      plant: JOIN analytics.dim_plant pl ON pl.plant_id = r.plant_id
+      product: JOIN analytics.dim_product p ON p.product_id = r.product_id
+    dimensions:
+      plant:
+        expr: pl.plant_name
+        join: plant
+        description: Manufacturing plant
+      plant_region:
+        expr: pl.plant_region
+        join: plant
+        description: Region the plant is in (South, Midwest, West)
+      product:
+        expr: p.product_name
+        join: product
+        description: Product name
+      category:
+        expr: p.category
+        join: product
+        description: Product category
+
+metrics:
+  - name: net_sales
+    label: Net sales
+    entity: orders
+    unit: usd
+    synonyms: [sales, revenue, total sales]
+    description: >-
+      Revenue from completed orders after discounts: quantity x unit price minus discount.
+      Cancelled and returned orders are excluded. This is what "sales" means by default.
+    expr: >-
+      COALESCE(SUM(o.quantity * o.unit_price - o.discount_amount)
+      FILTER (WHERE o.status = 'completed'), 0)
+
+  - name: gross_sales
+    label: Gross sales
+    entity: orders
+    unit: usd
+    synonyms: [bookings, booked revenue]
+    description: >-
+      Value of all orders that were not cancelled, before discounts and before returns are
+      taken out: quantity x unit price for completed and returned orders.
+    expr: >-
+      COALESCE(SUM(o.quantity * o.unit_price)
+      FILTER (WHERE o.status IN ('completed', 'returned')), 0)
+
+  - name: discount_total
+    label: Discounts given
+    entity: orders
+    unit: usd
+    description: Total discount on completed orders.
+    expr: COALESCE(SUM(o.discount_amount) FILTER (WHERE o.status = 'completed'), 0)
+
+  - name: order_count
+    label: Orders
+    entity: orders
+    unit: count
+    synonyms: [number of orders, orders placed]
+    description: Number of completed orders. Cancelled and returned orders are not counted.
+    expr: COUNT(*) FILTER (WHERE o.status = 'completed')
+
+  - name: units_sold
+    label: Units sold
+    entity: orders
+    unit: cases
+    synonyms: [cases sold, volume sold]
+    description: Cases on completed orders.
+    expr: COALESCE(SUM(o.quantity) FILTER (WHERE o.status = 'completed'), 0)
+
+  - name: average_order_value
+    label: Average order value
+    entity: orders
+    unit: usd
+    synonyms: [AOV]
+    description: Net sales divided by the number of completed orders.
+    expr: >-
+      SUM(o.quantity * o.unit_price - o.discount_amount) FILTER (WHERE o.status = 'completed')
+      / NULLIF(COUNT(*) FILTER (WHERE o.status = 'completed'), 0)
+
+  - name: cancellation_rate
+    label: Cancellation rate
+    entity: orders
+    unit: ratio
+    description: Cancelled orders divided by all orders placed.
+    expr: >-
+      COUNT(*) FILTER (WHERE o.status = 'cancelled')::numeric / NULLIF(COUNT(*), 0)
+
+  - name: return_rate
+    label: Return rate
+    entity: orders
+    unit: ratio
+    description: >-
+      Returned orders divided by orders that were fulfilled (completed plus returned).
+      Cancelled orders are in neither side.
+    expr: >-
+      COUNT(*) FILTER (WHERE o.status = 'returned')::numeric
+      / NULLIF(COUNT(*) FILTER (WHERE o.status IN ('completed', 'returned')), 0)
+
+  - name: units_produced
+    label: Units produced
+    entity: production
+    unit: cases
+    synonyms: [production, total production, output]
+    description: >-
+      Cases produced, including cases later scrapped. This is what "production" means by
+      default.
+    expr: COALESCE(SUM(r.units_produced), 0)
+
+  - name: good_units
+    label: Good units
+    entity: production
+    unit: cases
+    synonyms: [sellable output, net production]
+    description: Cases produced minus cases scrapped by quality control.
+    expr: COALESCE(SUM(r.units_produced - r.units_scrapped), 0)
+
+  - name: scrap_rate
+    label: Scrap rate
+    entity: production
+    unit: ratio
+    synonyms: [reject rate, waste rate]
+    description: Cases scrapped divided by cases produced.
+    expr: SUM(r.units_scrapped)::numeric / NULLIF(SUM(r.units_produced), 0)
+
+  - name: downtime_minutes
+    label: Downtime
+    entity: production
+    unit: minutes
+    synonyms: [line stoppage, unplanned downtime]
+    description: Minutes of unplanned line stoppage.
+    expr: COALESCE(SUM(r.downtime_minutes), 0)

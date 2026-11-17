@@ -1,0 +1,8 @@
+{
+  "model": "claude-haiku-5-5",
+  "seeded_at": "2026-11-17T18:41:00+00:00",
+  "business_timezone": "America/Chicago",
+  "warehouse_unchanged": true,
+  "orders": 38913,
+  "production_runs": 2437
+}

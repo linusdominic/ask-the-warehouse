@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask the warehouse</title>
+<style>
+  :root {
+    --bg: #f6f5f2; --panel: #ffffff; --ink: #1c1b19; --muted: #6b6a66; --line: #e3e1dc;
+    --accent: #1f5f8b; --accent-soft: #e4eef5; --good: #2f7d4f; --warn: #a8641a; --bar: #4f8bb3;
+    --user: #1f5f8b; --user-ink: #ffffff; --code: #f1efea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181a; --panel: #202225; --ink: #ecebe8; --muted: #9c9b97; --line: #33363a;
+      --accent: #7fb6dc; --accent-soft: #24323c; --good: #6fc08e; --warn: #e0a55a; --bar: #5f9cc5;
+      --user: #2c5f82; --user-ink: #ffffff; --code: #191b1d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  header { display: flex; align-items: center; gap: 14px; padding: 12px 20px;
+           border-bottom: 1px solid var(--line); background: var(--panel); flex-wrap: wrap; }
+  header h1 { font-size: 16px; margin: 0; font-weight: 650; }
+  header .sub { color: var(--muted); font-size: 13px; }
+  .pill { margin-left: auto; font-size: 12.5px; padding: 4px 10px; border-radius: 999px;
+          border: 1px solid var(--line); display: flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+  .pill.stale .dot { background: var(--warn); }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; padding: 16px 20px;
+         max-width: 1240px; margin: 0 auto; height: calc(100vh - 58px); }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; height: auto; } }
+  .chat { display: flex; flex-direction: column; min-height: 0; background: var(--panel);
+          border: 1px solid var(--line); border-radius: 12px; }
+  #log { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .msg { max-width: 92%; }
+  .msg.user { align-self: flex-end; background: var(--user); color: var(--user-ink);
+              padding: 8px 13px; border-radius: 14px 14px 3px 14px; }
+  .msg.bot .text { white-space: pre-wrap; }
+  .status { color: var(--muted); font-size: 13px; font-style: italic; }
+  .card { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+          background: var(--bg); }
+  .card h3 { margin: 0 0 2px; font-size: 14px; }
+  .card .window { color: var(--muted); font-size: 12.5px; margin-bottom: 8px; }
+  .big { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px; }
+  th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  details { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+  details summary { cursor: pointer; }
+  pre { background: var(--code); padding: 8px 10px; border-radius: 6px; overflow-x: auto;
+        font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink); margin: 6px 0; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 1px 7px; border-radius: 999px;
+         background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 1px; }
+  .tag.warn { background: transparent; border: 1px solid var(--warn); color: var(--warn); }
+  .choices, .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line);
+           background: var(--panel); color: var(--ink); padding: 6px 11px; }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { button.primary { color: #10202b; } }
+  button.small { font-size: 12px; padding: 2px 8px; }
+  form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+  input[type=text] { flex: 1; font: inherit; padding: 9px 12px; border-radius: 8px;
+                     border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+  .chips { padding: 0 12px 12px; margin-top: 0; }
+  .chips button { font-size: 12.5px; color: var(--muted); }
+  aside { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; min-height: 0; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .panel h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em;
+              color: var(--muted); font-weight: 650; }
+  .item { padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px; }
+  .item:first-of-type { border-top: 0; padding-top: 0; }
+  .item .name { font-weight: 600; }
+  .item .meta { color: var(--muted); font-size: 12px; }
+  .item pre { white-space: pre-wrap; }
+  .empty { color: var(--muted); font-size: 13px; }
+  svg text { fill: var(--muted); font-size: 11px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ask the warehouse</h1>
+  <span class="sub" id="company"></span>
+  <span class="pill" id="fresh"><span class="dot"></span><span id="fresh-text">checking data…</span></span>
+</header>
+<main>
+  <section class="chat">
+    <div id="log"></div>
+    <div class="chips" id="chips"></div>
+    <form id="form">
+      <input type="text" id="input" placeholder="Ask about sales or production…" autocomplete="off">
+      <button class="primary" type="submit">Ask</button>
+    </form>
+  </section>
+  <aside>
+    <div class="panel"><h2>Digests and alerts</h2><div id="subs"></div></div>
+    <div class="panel"><h2>Notifications</h2><div id="notes"></div></div>
+    <div class="panel"><h2>Questions we could not answer</h2><div id="gaps"></div></div>
+  </aside>
+</main>
+<script>
+const EXAMPLES = [
+  "What are total sales today?",
+  "Scrap rate at each plant last week",
+  "Units produced per day over the last 7 days",
+  "Send me yesterday's net sales by region every morning at 8",
+  "Alert me if today's scrap rate goes above 3%",
+];
+const $ = (id) => document.getElementById(id);
+let threadId = null;
+let busy = false;
+
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [key, value] of Object.entries(attrs)) {
+    if (key === "class") node.className = value;
+    else if (key.startsWith("on")) node.addEventListener(key.slice(2), value);
+    else node.setAttribute(key, value);
+  }
+  for (const child of children) node.append(child);
+  return node;
+}
+
+function fmt(value, unit) {
+  if (value === null || value === undefined) return "no data";
+  if (typeof value !== "number") return String(value);
+  if (unit === "usd") return "$" + value.toLocaleString("en-US", { maximumFractionDigits: Math.abs(value) >= 1000 ? 0 : 2 });
+  if (unit === "ratio") return (value * 100).toFixed(1) + "%";
+  return value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+}
+
+function label(key, value) {
+  if (key === "period" && typeof value === "string") return value.slice(0, value.endsWith("T00:00:00") ? 10 : 16).replace("T", " ");
+  return String(value);
+}
+
+function chart(rows, keyColumn, unit) {
+  const width = 560, rowHeight = 22, left = 150, right = 70;
+  const values = rows.map((row) => row.value ?? 0);
+  const max = Math.max(...values, 0) || 1;
+  const height = rows.length * rowHeight + 6;
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  svg.setAttribute("width", "100%");
+  svg.setAttribute("role", "img");
+  rows.forEach((row, index) => {
+    const y = index * rowHeight + 4;
+    const length = Math.max(1, ((row.value ?? 0) / max) * (width - left - right));
+    const name = document.createElementNS(ns, "text");
+    name.setAttribute("x", left - 8); name.setAttribute("y", y + 13); name.setAttribute("text-anchor", "end");
+    name.textContent = label(keyColumn, row[keyColumn]).slice(0, 24);
+    const bar = document.createElementNS(ns, "rect");
+    bar.setAttribute("x", left); bar.setAttribute("y", y); bar.setAttribute("width", length);
+    bar.setAttribute("height", rowHeight - 7); bar.setAttribute("rx", 3); bar.setAttribute("fill", "var(--bar)");
+    const number = document.createElementNS(ns, "text");
+    number.setAttribute("x", left + length + 6); number.setAttribute("y", y + 13);
+    number.textContent = fmt(row.value, unit);
+    svg.append(name, bar, number);
+  });
+  return svg;
+}
+
+function resultCard(result) {
+  const card = el("div", { class: "card" });
+  const title = el("h3", {}, result.label || "Query result");
+  if (!result.governed) title.append(el("span", { class: "tag warn" }, "ungoverned SQL"));
+  if (result.stale) title.append(el("span", { class: "tag warn" }, "data is behind"));
+  card.append(title);
+  if (result.time_range) card.append(el("div", { class: "window" }, result.time_range));
+  const keys = result.columns.filter((column) => column !== "value");
+  const rows = result.rows;
+  if (result.governed && keys.length === 0) {
+    card.append(el("div", { class: "big" }, fmt(rows[0]?.value, result.unit)));
+    const cmp = result.comparison;
+    if (cmp && cmp.change_pct !== null) {
+      const up = cmp.change_pct >= 0;
+      card.append(el("div", { class: "window" },
+        `${up ? "▲" : "▼"} ${Math.abs(cmp.change_pct * 100).toFixed(1)}% against ${fmt(cmp.previous_value, result.unit)} in ${cmp.previous_time_range}`));
+    }
+  } else if (result.governed && keys.length === 1 && rows.length > 1 && rows.length <= 31) {
+    card.append(chart(rows, keys[0], result.unit));
+  }
+  if (keys.length > 0 || !result.governed) {
+    const table = el("table");
+    table.append(el("tr", {}, ...result.columns.map((column) =>
+      el("th", { class: column === "value" ? "num" : "" }, column === "value" ? (result.label || "value") : column))));
+    for (const row of rows.slice(0, 12)) {
+      table.append(el("tr", {}, ...result.columns.map((column) =>
+        el("td", { class: typeof row[column] === "number" ? "num" : "" },
+           column === "value" ? fmt(row[column], result.unit) : label(column, row[column])))));
+    }
+    const wrap = el("details", {}, el("summary", {}, `Table (${rows.length} row${rows.length === 1 ? "" : "s"})`), table);
+    if (keys.length !== 1 || rows.length > 31 || !result.governed) wrap.setAttribute("open", "");
+    card.append(wrap);
+  }
+  const how = el("details", {}, el("summary", {}, "How this was computed"));
+  if (result.definition) how.append(el("p", {}, result.definition));
+  how.append(el("pre", {}, result.sql));
+  if (result.data_as_of) how.append(el("p", {}, `Data as of ${result.data_as_of} (${result.lag_seconds} s behind when asked).`));
+  card.append(how);
+  return card;
+}
+
+function proposalCard(proposal, refresh) {
+  const card = el("div", { class: "card" });
+  card.append(el("h3", {}, `${proposal.kind === "alert" ? "Alert" : "Digest"} proposed: ${proposal.name}`));
+  const note = el("div", { class: "window" }, "Nothing is sent until you approve.");
+  const act = async (action) => {
+    const response = await fetch(`/api/subscriptions/${proposal.id}/${action}`, { method: "POST" });
+    note.textContent = response.ok ? (action === "approve" ? "Approved. It is now active." : "Declined.") : "This proposal was already decided.";
+    buttons.remove();
+    refresh();
+  };
+  const buttons = el("div", { class: "choices" },
+    el("button", { class: "primary", onclick: () => act("approve") }, "Approve"),
+    el("button", { onclick: () => act("decline") }, "Decline"));
+  card.append(note, buttons);
+  return card;
+}
+
+function scroll() { $("log").scrollTop = $("log").scrollHeight; }
+
+// The model marks key figures with **double asterisks**. Show them as bold, and nothing else.
+function showText(node, raw) {
+  node.replaceChildren(...raw.split(/(\*\*[^*\n]+\*\*)/).map((part) =>
+    part.startsWith("**") && part.endsWith("**") && part.length > 4 ? el("strong", {}, part.slice(2, -2)) : part));
+}
+
+async function ask(message) {
+  if (busy || !message.trim()) return;
+  busy = true;
+  $("chips").style.display = "none";
+  $("log").append(el("div", { class: "msg user" }, message));
+  const text = el("div", { class: "text" });
+  const status = el("div", { class: "status" }, "Thinking…");
+  const cards = el("div");
+  $("log").append(el("div", { class: "msg bot" }, status, text, cards));
+  scroll();
+
+  let raw = "";
+  const say = (value) => { raw = value; showText(text, raw); };
+  const handlers = {
+    text: (e) => { status.textContent = ""; say(raw + e.text); },
+    text_reset: () => say(""),
+    tool_call: (e) => {
+      const names = { query_metric: `Querying ${e.input.metric || "the warehouse"}…`, list_dimension_values: "Checking names…",
+                      propose_digest: "Drafting a digest…", propose_alert: "Drafting an alert…", report_gap: "Noting what is missing…" };
+      status.textContent = names[e.name] || "";
+    },
+    result: (e) => cards.append(resultCard(e)),
+    proposal: (e) => cards.append(proposalCard(e, refreshSide)),
+    clarify: (e) => {
+      say(e.question);
+      if (e.options.length) cards.append(el("div", { class: "choices" }, ...e.options.map((option) =>
+        el("button", { onclick: () => ask(option) }, option))));
+    },
+    gap: () => refreshSide(),
+    error: (e) => say(e.message),
+    done: (e) => { threadId = e.thread_id; status.textContent = ""; if (!raw) say(e.text); },
+  };
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ message, thread_id: threadId }),
+    });
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      let cut;
+      while ((cut = buffer.indexOf("\n\n")) >= 0) {
+        const block = buffer.slice(0, cut); buffer = buffer.slice(cut + 2);
+        const event = block.match(/^event: (.*)$/m)?.[1];
+        const data = block.match(/^data: (.*)$/m)?.[1];
+        if (event && data && handlers[event]) { handlers[event](JSON.parse(data)); scroll(); }
+      }
+    }
+  } catch (error) {
+    say("The request failed. Is the server running?");
+  }
+  status.textContent = "";
+  busy = false;
+  $("input").focus();
+}
+
+async function refreshStatus() {
+  try {
+    const status = await (await fetch("/api/status")).json();
+    $("company").textContent = `${status.company} · ${status.business_time}`;
+    const fresh = status.freshness;
+    $("fresh").classList.toggle("stale", fresh.stale);
+    const lag = fresh.lag_seconds;
+    const ago = lag === null ? "no data" : lag < 90 ? `${lag} s behind` : `${Math.round(lag / 60)} min behind`;
+    $("fresh-text").textContent = fresh.stale ? `Data is behind: ${ago}` : `Live: ${ago}`;
+  } catch (error) { $("fresh-text").textContent = "server unreachable"; }
+}
+
+async function refreshSide() {
+  const [subs, notes, gaps] = await Promise.all(
+    ["/api/subscriptions", "/api/notifications", "/api/gaps"].map((url) => fetch(url).then((r) => r.json())));
+  const act = (id, action) => fetch(`/api/subscriptions/${id}/${action}`, { method: "POST" }).then(refreshSide);
+  $("subs").replaceChildren(...(subs.length ? subs.map((sub) => el("div", { class: "item" },
+    el("div", { class: "name" }, sub.name, el("span", { class: "tag" + (sub.status === "pending" ? " warn" : "") }, sub.status)),
+    el("div", { class: "meta" }, sub.summary),
+    sub.status === "active"
+      ? el("div", { class: "choices" },
+          el("button", { class: "small", onclick: () => act(sub.id, "run") }, "Run now"),
+          el("button", { class: "small", onclick: () => act(sub.id, "cancel") }, "Stop"))
+      : el("div", { class: "choices" },
+          el("button", { class: "small", onclick: () => act(sub.id, "approve") }, "Approve"),
+          el("button", { class: "small", onclick: () => act(sub.id, "decline") }, "Decline"))))
+    : [el("div", { class: "empty" }, "None yet. Try: “Send me yesterday's net sales by region every morning at 8”.")]));
+  $("notes").replaceChildren(...(notes.length ? notes.slice(0, 6).map((note) => el("div", { class: "item" },
+    el("div", { class: "name" }, note.title),
+    el("pre", {}, note.body),
+    el("div", { class: "meta" }, `${new Date(note.created_at).toLocaleString()} · ${note.delivered_to}`)))
+    : [el("div", { class: "empty" }, "Digests and alerts appear here, and at your webhook if one is set.")]));
+  $("gaps").replaceChildren(...(gaps.length ? gaps.slice(0, 6).map((gap) => el("div", { class: "item" },
+    el("div", {}, gap.request || ""), el("div", { class: "meta" }, `Missing: ${gap.missing || "unknown"}`)))
+    : [el("div", { class: "empty" }, "When a question needs a metric that does not exist, it is logged here.")]));
+}
+
+$("chips").append(...EXAMPLES.map((example) => el("button", { onclick: () => ask(example) }, example)));
+$("form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const message = $("input").value; $("input").value = "";
+  ask(message);
+});
+refreshStatus(); refreshSide();
+setInterval(refreshStatus, 5000); setInterval(refreshSide, 10000);
+</script>
+</body>
+</html>

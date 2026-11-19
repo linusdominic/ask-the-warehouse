@@ -8,6 +8,11 @@ near-real-time data, and the app can also send them on a schedule or alert on a 
 
 ![The chat page answering a comparison and a breakdown, with an active digest and alert](docs/screenshot.jpg)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/architecture-dark.svg">
+  <img alt="Architecture: the chat page posts a question to the agent loop (agent.py, Claude Haiku 5.5), which calls query_metric. The semantic layer (semantic.py, clock.py) checks the request against metrics.yml, resolves business time and compiles SQL, run on PostgreSQL as the read-only askwh_ro role. A simulated feed inserts orders and advances the watermark. The agent can propose digests and alerts, stored as pending until a person approves; the scheduler then runs the stored request through the semantic layer with no model call." src="docs/img/architecture-light.svg">
+</picture>
+
 It is a portfolio project. It runs on a laptop against PostgreSQL with simulated data and
 has not been deployed anywhere. Every number below comes from a run on my machine on
 17 November 2026, and the command that reproduces it is next to it.
@@ -43,6 +48,11 @@ which is not what a dashboard on a wall is for.
 The evaluation asks 46 questions of three approaches that all use the same model
 (Claude Haiku 5.5) and the same data.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/results-dark.svg">
+  <img alt="Correct answers on 46 questions, same model and data, first run: semantic layer 46/46 = 100%, text-to-SQL with definitions 46/46 = 100%, text-to-SQL with schema only 40/46 = 87%." src="docs/img/results-light.svg">
+</picture>
+
 | Approach | Correct (95% CI) | Both phrasings of a question correct | Latency p50 | Cost per question |
 | --- | --- | --- | --- | --- |
 | Semantic layer (this project) | 46/46 = 100% (92% to 100%) | 23/23 | 1.9 s | $0.00118 |
@@ -69,6 +79,11 @@ The evaluation asks 46 questions of three approaches that all use the same model
   definitions wrote `TIMESTAMP '2026-11-09 00:00:00-06'`. PostgreSQL silently drops the
   offset from that literal, so the week started six hours early and the answer was wrong.
   The semantic layer cannot make that mistake, because the model never writes a timestamp.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/runs-dark.svg">
+  <img alt="Correct in two separate runs: semantic layer 46/46 and 46/46; text-to-SQL with definitions 46/46 and 45/46; text-to-SQL with schema only 40/46 and 39/46." src="docs/img/runs-light.svg">
+</picture>
 
 | Approach | Correct in run 1 | Correct in run 2 | Questions whose verdict changed |
 | --- | --- | --- | --- |

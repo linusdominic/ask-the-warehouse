@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="245" viewBox="0 0 820 245" role="img" aria-label="Correct answers on 46 questions">
+  <title>Correct answers on 46 questions</title>
+  <rect x="0.5" y="0.5" width="819" height="244" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="28.0" y="40.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#f0f6fc" text-anchor="start">Correct answers on 46 questions</text>
+  <text x="28.0" y="60.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">Same model (Claude Haiku 5.5), same data and the same scoring for all three, first run. A small, friendly test: the</text>
+  <text x="28.0" y="80.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">questions were written by the author of the metric catalogue.</text>
+  <text x="221.6" y="119.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#f0f6fc" text-anchor="end">Semantic layer (this project)</text>
+  <path d="M235.6,106.0 H686.4 Q690.4,106.0 690.4,110.0 V120.0 Q690.4,124.0 686.4,124.0 H235.6 Z" fill="#3987e5"/>
+  <text x="698.4" y="119.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#f0f6fc" text-anchor="start">46/46 = 100%</text>
+  <text x="221.6" y="153.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="end">Text-to-SQL + definitions</text>
+  <path d="M235.6,140.0 H686.4 Q690.4,140.0 690.4,144.0 V154.0 Q690.4,158.0 686.4,158.0 H235.6 Z" fill="#4d5560"/>
+  <text x="698.4" y="153.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#f0f6fc" text-anchor="start">46/46 = 100%</text>
+  <text x="221.6" y="187.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="end">Text-to-SQL, schema only</text>
+  <path d="M235.6,174.0 H627.0 Q631.0,174.0 631.0,178.0 V188.0 Q631.0,192.0 627.0,192.0 H235.6 Z" fill="#4d5560"/>
+  <text x="639.0" y="187.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#f0f6fc" text-anchor="start">40/46 = 87%</text>
+  <line x1="235.6" y1="100.0" x2="235.6" y2="198.0" stroke="#3d444d"/>
+  <text x="28.0" y="223.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">Source: results/report.md, rebuilt from results/records.jsonl by make report.</text>
+</svg>

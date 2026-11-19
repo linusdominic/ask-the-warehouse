@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="287" viewBox="0 0 820 287" role="img" aria-label="Correct in two separate runs">
+  <title>Correct in two separate runs</title>
+  <rect x="0.5" y="0.5" width="819" height="286" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="28.0" y="40.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#1f2328" text-anchor="start">Correct in two separate runs</text>
+  <text x="28.0" y="60.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Same 46 questions and model. One verdict changed for each text-to-SQL baseline and none for the semantic layer.</text>
+  <rect x="28.0" y="76.0" width="12" height="12" rx="3" fill="#2a78d6"/>
+  <text x="46.0" y="86.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Run 1</text>
+  <rect x="105.7" y="76.0" width="12" height="12" rx="3" fill="#eb6834"/>
+  <text x="123.7" y="86.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Run 2</text>
+  <text x="192.5" y="127.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1f2328" text-anchor="end">Semantic layer (governed)</text>
+  <path d="M206.5,108.0 H742.1 Q746.1,108.0 746.1,112.0 V118.0 Q746.1,122.0 742.1,122.0 H206.5 Z" fill="#2a78d6"/>
+  <text x="754.1" y="119.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">46/46</text>
+  <path d="M206.5,124.0 H742.1 Q746.1,124.0 746.1,128.0 V134.0 Q746.1,138.0 742.1,138.0 H206.5 Z" fill="#eb6834"/>
+  <text x="754.1" y="135.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">46/46</text>
+  <text x="192.5" y="175.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1f2328" text-anchor="end">Text-to-SQL + definitions</text>
+  <path d="M206.5,156.0 H742.1 Q746.1,156.0 746.1,160.0 V166.0 Q746.1,170.0 742.1,170.0 H206.5 Z" fill="#2a78d6"/>
+  <text x="754.1" y="167.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">46/46</text>
+  <path d="M206.5,172.0 H730.4 Q734.4,172.0 734.4,176.0 V182.0 Q734.4,186.0 730.4,186.0 H206.5 Z" fill="#eb6834"/>
+  <text x="742.4" y="183.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">45/46</text>
+  <text x="192.5" y="223.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1f2328" text-anchor="end">Text-to-SQL, schema only</text>
+  <path d="M206.5,204.0 H671.7 Q675.7,204.0 675.7,208.0 V214.0 Q675.7,218.0 671.7,218.0 H206.5 Z" fill="#2a78d6"/>
+  <text x="683.7" y="215.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">40/46</text>
+  <path d="M206.5,220.0 H660.0 Q664.0,220.0 664.0,224.0 V230.0 Q664.0,234.0 660.0,234.0 H206.5 Z" fill="#eb6834"/>
+  <text x="672.0" y="231.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">39/46</text>
+  <line x1="206.5" y1="102.0" x2="206.5" y2="240.0" stroke="#d0d7de"/>
+  <text x="28.0" y="265.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#818b98" text-anchor="start">Source: results/report.md (run-to-run stability), from results/records.jsonl and results/records_repeat.jsonl.</text>
+</svg>

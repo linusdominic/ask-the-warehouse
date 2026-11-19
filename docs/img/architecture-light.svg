@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="404" viewBox="0 0 1000 404" role="img" aria-label="How a question becomes a governed number">
+  <title>How a question becomes a governed number</title>
+  <rect x="0.5" y="0.5" width="999" height="403" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="28.0" y="40.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#1f2328" text-anchor="start">How a question becomes a governed number</text>
+  <text x="28.0" y="60.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">The model picks a metric, time range, dimensions and filters; code writes the SQL. Each result carries the rows, the exact window, the definition and</text>
+  <text x="28.0" y="80.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">the pipeline watermark.</text>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#818b98"/></marker></defs>
+  <path d="M195.0,168.0 C241.0,168.0 238.0,168.0 284.0,168.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M454.0,168.0 C500.0,168.0 497.0,168.0 543.0,168.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M713.0,168.0 C759.0,168.0 756.0,168.0 802.0,168.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M888.5,256.0 L888.5,217.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M370.5,214.0 L370.5,261.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M454.0,310.0 C500.0,310.0 497.0,310.0 543.0,310.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M629.5,264.0 L629.5,233.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="28.0" y="122.0" width="167.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="29.0" y="130.0" width="3" height="76.0" rx="1.5" fill="#2a78d6"/>
+  <text x="42.0" y="147.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Chat page</text>
+  <text x="42.0" y="167.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">static/index.html: POST</text>
+  <text x="42.0" y="183.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">/api/chat, streamed</text>
+  <text x="42.0" y="199.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">reply</text>
+  <rect x="287.0" y="122.0" width="167.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="288.0" y="130.0" width="3" height="76.0" rx="1.5" fill="#afb8c1"/>
+  <text x="301.0" y="147.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Agent loop</text>
+  <text x="301.0" y="167.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">agent.py: Claude Haiku</text>
+  <text x="301.0" y="183.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">5.5 with the metric</text>
+  <text x="301.0" y="199.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">catalogue as tools</text>
+  <rect x="546.0" y="106.0" width="167.0" height="124.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="547.0" y="114.0" width="3" height="108.0" rx="1.5" fill="#eb6834"/>
+  <text x="560.0" y="131.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Semantic layer</text>
+  <text x="560.0" y="151.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">semantic.py, clock.py:</text>
+  <text x="560.0" y="167.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">check against</text>
+  <text x="560.0" y="183.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">metrics.yml, resolve</text>
+  <text x="560.0" y="199.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">business time, compile</text>
+  <text x="560.0" y="215.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">SQL</text>
+  <rect x="805.0" y="122.0" width="167.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="806.0" y="130.0" width="3" height="76.0" rx="1.5" fill="#1baf7a"/>
+  <text x="819.0" y="147.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">PostgreSQL</text>
+  <text x="819.0" y="167.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">analytics schema,</text>
+  <text x="819.0" y="183.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">queried as the read-only</text>
+  <text x="819.0" y="199.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">askwh_ro role</text>
+  <rect x="287.0" y="264.0" width="167.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="288.0" y="272.0" width="3" height="76.0" rx="1.5" fill="#1baf7a"/>
+  <text x="301.0" y="289.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Digests and alerts</text>
+  <text x="301.0" y="309.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">subscriptions.py:</text>
+  <text x="301.0" y="325.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">pending until a person</text>
+  <text x="301.0" y="341.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">approves</text>
+  <rect x="546.0" y="264.0" width="167.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="547.0" y="272.0" width="3" height="76.0" rx="1.5" fill="#afb8c1"/>
+  <text x="560.0" y="289.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Scheduler</text>
+  <text x="560.0" y="309.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">runs the stored request</text>
+  <text x="560.0" y="325.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">with no model call;</text>
+  <text x="560.0" y="341.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">in-app list and webhook</text>
+  <rect x="805.0" y="256.0" width="167.0" height="108.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="806.0" y="264.0" width="3" height="92.0" rx="1.5" fill="#2a78d6"/>
+  <text x="819.0" y="281.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Simulated feed</text>
+  <text x="819.0" y="301.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">seed.py: new orders and</text>
+  <text x="819.0" y="317.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">production runs,</text>
+  <text x="819.0" y="333.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">watermark every two</text>
+  <text x="819.0" y="349.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">seconds</text>
+  <rect x="213.9" y="149.0" width="54.1" height="16" rx="4" fill="#ffffff"/>
+  <text x="241.0" y="161.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="middle">question</text>
+  <rect x="459.7" y="149.0" width="80.6" height="16" rx="4" fill="#ffffff"/>
+  <text x="500.0" y="161.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="middle">query_metric</text>
+  <rect x="718.3" y="149.0" width="81.5" height="16" rx="4" fill="#ffffff"/>
+  <text x="759.0" y="161.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="middle">compiled SQL</text>
+  <rect x="891.5" y="227.0" width="48.0" height="16" rx="4" fill="#ffffff"/>
+  <text x="894.5" y="239.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="start">inserts</text>
+  <rect x="373.5" y="231.0" width="54.1" height="16" rx="4" fill="#ffffff"/>
+  <text x="376.5" y="243.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="start">proposal</text>
+  <rect x="471.6" y="291.0" width="56.8" height="16" rx="4" fill="#ffffff"/>
+  <text x="500.0" y="303.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="middle">approved</text>
+  <rect x="632.5" y="239.0" width="90.7" height="16" rx="4" fill="#ffffff"/>
+  <text x="635.5" y="251.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#59636e" text-anchor="start">stored request</text>
+  <rect x="28.0" y="384.0" width="3" height="12" rx="1.5" fill="#2a78d6"/>
+  <text x="38.0" y="394.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">input</text>
+  <rect x="91.0" y="384.0" width="3" height="12" rx="1.5" fill="#afb8c1"/>
+  <text x="101.0" y="394.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">step</text>
+  <rect x="150.5" y="384.0" width="3" height="12" rx="1.5" fill="#1baf7a"/>
+  <text x="160.5" y="394.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">stored result</text>
+  <rect x="261.6" y="384.0" width="3" height="12" rx="1.5" fill="#eb6834"/>
+  <text x="271.6" y="394.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">check</text>
+</svg>

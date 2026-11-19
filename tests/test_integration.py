@@ -357,6 +357,7 @@ async def test_chat_endpoint_streams_a_governed_answer_and_remembers_the_thread(
         llm=llm,
         subscriptions=Subscriptions(owner, readonly, catalog),
         schema="",
+        clock=lambda: NOW,
     )
     with TestClient(create_app(deps)) as client:
         assert client.get("/health").json()["status"] == "ok"

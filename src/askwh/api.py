@@ -5,7 +5,7 @@ import json
 import logging
 import random
 import uuid
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Callable
 from contextlib import asynccontextmanager, suppress
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -47,6 +47,7 @@ class Deps:
     llm: LLM
     subscriptions: Subscriptions
     schema: str
+    clock: Callable[[], datetime] = utcnow
 
 
 class ChatRequest(BaseModel):
@@ -137,7 +138,7 @@ def create_app(deps: Deps | None = None) -> FastAPI:
         return Toolbox(
             d.catalog,
             d.readonly_pool,
-            utcnow,
+            d.clock,
             app_pool=d.pool,
             subscriptions=d.subscriptions,
             thread_id=thread_id,
@@ -173,7 +174,7 @@ def create_app(deps: Deps | None = None) -> FastAPI:
     @app.get("/api/status")
     async def status(request: Request) -> dict[str, Any]:
         d = get(request)
-        local = utcnow().astimezone(d.catalog.tz)
+        local = d.clock().astimezone(d.catalog.tz)
         return {
             "company": COMPANY,
             "model": d.settings.model,
@@ -207,7 +208,7 @@ def create_app(deps: Deps | None = None) -> FastAPI:
                         system=system_prompt("semantic", d.catalog, d.schema),
                         history=await load_thread(d, thread_id),
                         user_message=body.message,
-                        now=utcnow(),
+                        now=d.clock(),
                         emit=queue.put,
                     )
                     await save_thread(d, thread_id, result.messages)
@@ -256,7 +257,7 @@ def create_app(deps: Deps | None = None) -> FastAPI:
     async def decide(subscription_id: int, action: str, request: Request) -> dict[str, Any]:
         d = get(request)
         if action in ("approve", "decline"):
-            row = await d.subscriptions.decide(subscription_id, action == "approve", utcnow())
+            row = await d.subscriptions.decide(subscription_id, action == "approve", d.clock())
             if row is None:
                 raise HTTPException(409, "That proposal is not waiting for a decision.")
             return as_json(row)
@@ -265,7 +266,7 @@ def create_app(deps: Deps | None = None) -> FastAPI:
                 raise HTTPException(409, "That subscription is not active.")
             return {"id": subscription_id, "status": "paused"}
         if action == "run":
-            sent = await d.subscriptions.run_now(subscription_id, utcnow())
+            sent = await d.subscriptions.run_now(subscription_id, d.clock())
             if sent is None:
                 raise HTTPException(409, "That subscription is not active.")
             return {"id": subscription_id, "sent": sent}

@@ -61,7 +61,8 @@ The evaluation asks 46 questions of three approaches that all use the same model
 
 `make eval` produced these; `make report` rebuilds them from
 [results/records.jsonl](results/records.jsonl). Full tables are in
-[results/report.md](results/report.md).
+[results/report.md](results/report.md), which `make report` overwrites: that is how the
+committed file is produced.
 
 **What the numbers say**
 
@@ -137,6 +138,9 @@ make db                  # PostgreSQL on localhost:5436
 make seed                # 90 days of simulated orders and production runs
 make dev                 # http://localhost:8010
 ```
+
+`uv run askwh` serves the app without auto-reload on the port in the `PORT` environment
+variable, 8010 if unset.
 
 Or run both containers with `make up`. The app loads the simulated data itself if the
 warehouse is empty. While it runs, a background task inserts new orders at roughly the
